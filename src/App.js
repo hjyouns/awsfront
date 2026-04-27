@@ -5,15 +5,14 @@ function App() {
   const [error, setError] = useState(null);
 
   const callBackend = async () => {
-    // Dockerfile에서 설정한 VITE_ 변수명을 사용하여 주소를 가져옵니다.
-    // 만약 이 값이 읽히지 않으면 undefined가 발생하므로 기본값을 설정해두면 좋습니다.
-    const albAddress = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
-
+    // CRA 환경 변수 읽기 방식 (process.env)
+    const albAddress = process.env.REACT_APP_API_BASE_URL;
+    
     setMessage('호출 중...');
     setError(null);
 
     try {
-      // 주소 뒤에 /api/hello가 붙으므로, Secrets에는 끝에 / 없이 IP만 넣어야 합니다.
+      // albAddress가 제대로 설정되었는지 확인하며 호출
       const response = await fetch(`${albAddress}/api/hello`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -30,8 +29,8 @@ function App() {
     <div style={{ textAlign: 'center', marginTop: '50px', fontFamily: 'Arial' }}>
       <h2>🚀 React Frontend -{">"} ALB -{">"} Private Backend 테스트</h2>
       <p>아래 버튼을 눌러 Private 서브넷에 있는 백엔드를 호출해 보세요.</p>
-
-      <button
+      
+      <button 
         onClick={callBackend}
         style={{ padding: '10px 20px', fontSize: '16px', backgroundColor: '#ff9900', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
       >
