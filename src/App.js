@@ -6,7 +6,7 @@ function App() {
 
   const callBackend = async () => {
     // CRA 환경 변수 읽기 방식 (process.env)
-    const albAddress = process.env.REACT_APP_API_BASE_URL;
+    const albAddress = process.env.REACT_APP_API_BASE_URL || "http://localhost:8080";
     
     setMessage('호출 중...');
     setError(null);
