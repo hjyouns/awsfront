@@ -1,5 +1,3 @@
-App.js
-
 import React, { useState } from 'react';
 
 function App() {
@@ -8,7 +6,7 @@ function App() {
   const [file, setFile] = useState(null);
   const [uploadedFileName, setUploadedFileName] = useState(null);
 
-  const albAddress = process.env.REACT_APP_ALB_ADDRESS || "http://localhost:8080";
+  const albAddress = process.env.REACT_APP_API_BASE_URL || "http://localhost:8080";
 
   const callBackend = async () => {
     setMessage('호출 중...');
